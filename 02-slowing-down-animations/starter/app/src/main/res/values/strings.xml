@@ -1,0 +1,13 @@
+<resources>
+  <string name="app_name">MovieTime</string>
+  <string name="home">Home</string>
+  <string name="trending">Trending</string>
+  <string name="movie_poster">Movie poster</string>
+  <string name="show_ratings">Show ratings</string>
+  <string name="hide_ratings">Hide ratings</string>
+  <string name="poster_transition_name">Poster transition</string>
+  <string name="card_transition_name">Card transition</string>
+  <string name="poster_transition_name_id">Poster transition %d</string>
+  <string name="card_transition_name_id">Card transition %d</string>
+
+</resources>
