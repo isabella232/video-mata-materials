@@ -43,9 +43,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.transition.TransitionManager
 import com.bumptech.glide.Glide
-import com.google.android.material.transition.MaterialFade
 import com.raywenderlich.android.movietime.databinding.FragmentMovieDetailsBinding
 
 class MovieDetailsFragment: Fragment() {
@@ -76,7 +74,6 @@ class MovieDetailsFragment: Fragment() {
       movieDescriptionTextview.text = movie.summary
       ratingsTextview.text = movie.ratings.toString()
       showRatingsButton.setOnClickListener {
-        TransitionManager.beginDelayedTransition(root, MaterialFade())
         if (ratingsTextview.isVisible) {
           ratingsTextview.isInvisible = true
           showRatingsButton.text = resources.getString(R.string.show_ratings)
