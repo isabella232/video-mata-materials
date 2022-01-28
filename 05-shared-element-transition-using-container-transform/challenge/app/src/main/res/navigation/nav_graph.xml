@@ -32,37 +32,66 @@
   ~ THE SOFTWARE.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation android:id="@+id/nav_graph"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#C5E1A5"
-    android:padding="16dp">
+    app:startDestination="@id/allMoviesFragment">
 
-  <ImageView
-      android:id="@+id/poster_imageview"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:contentDescription="@string/movie_poster"
-      android:transitionName="@string/poster_transition_name"
-      app:layout_constraintBottom_toTopOf="@id/movie_name_textview"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:srcCompat="@tools:sample/avatars" />
+  <fragment
+      android:id="@+id/allMoviesFragment"
+      android:name="com.raywenderlich.android.movietime.AllMoviesFragment"
+      android:label="AllMoviesFragment"
+      tools:layout="@layout/fragment_movies">
+    <action
+        android:id="@+id/action_allMoviesFragment_to_movieDetailsFragment"
+        app:destination="@id/movieDetailsFragment">
+      <argument
+          android:name="movieId"
+          app:argType="long" />
+    </action>
+  </fragment>
 
-  <TextView
-      android:id="@+id/movie_name_textview"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="16dp"
-      android:layout_marginEnd="20dp"
-      android:layout_marginTop="16dp"
-      android:textSize="24sp"
-      android:textStyle="bold"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      tools:text="The Addams Family 2" />
+  <fragment
+      android:id="@+id/trendingMoviesFragment"
+      android:name="com.raywenderlich.android.movietime.TrendingMoviesFragment"
+      android:label="TrendingMoviesFragment"
+      tools:layout="@layout/fragment_movies">
+    <action
+        android:id="@+id/action_trendingMoviesFragment_to_movieDetailsFragment"
+        app:destination="@id/movieDetailsFragment">
+      <argument
+          android:name="movieId"
+          app:argType="long" />
+    </action>
+  </fragment>
 
+  <fragment
+      android:id="@+id/movieDetailsFragment"
+      android:name="com.raywenderlich.android.movietime.MovieDetailsFragment"
+      android:label="MovieDetailsFragment"
+      tools:layout="@layout/fragment_movie_details">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <argument
+        android:name="movieId"
+        app:argType="long" />
+    <action
+        android:id="@+id/action_movieDetailsFragment_to_posterFragment"
+        app:destination="@id/posterFragment" >
+      <argument
+          android:name="movieId"
+          app:argType="long" />
+    </action>
+  </fragment>
+
+  <fragment
+      android:id="@+id/posterFragment"
+      android:name="com.raywenderlich.android.movietime.PosterFragment"
+      android:label="PosterFragment"
+      tools:layout="@layout/fragment_poster">
+    <argument
+        android:name="movieId"
+        app:argType="long" />
+  </fragment>
+
+</navigation>

@@ -118,6 +118,7 @@ class MovieDetailsFragment: Fragment() {
       moviePosterImageview.setOnClickListener {
         val extras = FragmentNavigatorExtras(
             binding.moviePosterImageview to getString(R.string.poster_transition_name),
+            binding.container to getString(R.string.card_transition_name),
         )
         findNavController().navigate(
             MovieDetailsFragmentDirections.actionMovieDetailsFragmentToPosterFragment(

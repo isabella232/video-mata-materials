@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2022 Razeware LLC
+  ~ Copyright (c) 2019 Razeware LLC
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -19,10 +19,6 @@
   ~ merger, publication, distribution, sublicensing, creation of derivative works,
   ~ or sale is expressly withheld.
   ~
-  ~ This project and source code may use libraries or frameworks that are
-  ~ released under various Open-Source licenses. Use of those libraries and
-  ~ frameworks are governed by their own individual licenses.
-  ~
   ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
   ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
   ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -32,37 +28,17 @@
   ~ THE SOFTWARE.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#C5E1A5"
-    android:padding="16dp">
 
-  <ImageView
-      android:id="@+id/poster_imageview"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:contentDescription="@string/movie_poster"
-      android:transitionName="@string/poster_transition_name"
-      app:layout_constraintBottom_toTopOf="@id/movie_name_textview"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:srcCompat="@tools:sample/avatars" />
-
-  <TextView
-      android:id="@+id/movie_name_textview"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="16dp"
-      android:layout_marginEnd="20dp"
-      android:layout_marginTop="16dp"
-      android:textSize="24sp"
-      android:textStyle="bold"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      tools:text="The Addams Family 2" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+  <item android:drawable="@color/colorPrimary" />
+  <item
+      android:bottom="100dp"
+      android:left="100dp"
+      android:right="100dp"
+      android:top="100dp">
+    <bitmap
+        android:gravity="center"
+        android:src="@mipmap/ic_launcher" />
+  </item>
+</layer-list>

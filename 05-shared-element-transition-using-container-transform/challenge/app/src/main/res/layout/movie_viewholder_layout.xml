@@ -19,10 +19,6 @@
   ~ merger, publication, distribution, sublicensing, creation of derivative works,
   ~ or sale is expressly withheld.
   ~
-  ~ This project and source code may use libraries or frameworks that are
-  ~ released under various Open-Source licenses. Use of those libraries and
-  ~ frameworks are governed by their own individual licenses.
-  ~
   ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
   ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
   ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -32,37 +28,19 @@
   ~ THE SOFTWARE.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#C5E1A5"
-    android:padding="16dp">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="6dp">
 
   <ImageView
-      android:id="@+id/poster_imageview"
+      android:id="@+id/movie_poster_imageview"
       android:layout_width="match_parent"
-      android:layout_height="0dp"
+      android:layout_height="300dp"
       android:contentDescription="@string/movie_poster"
-      android:transitionName="@string/poster_transition_name"
-      app:layout_constraintBottom_toTopOf="@id/movie_name_textview"
-      app:layout_constraintTop_toTopOf="parent"
       tools:srcCompat="@tools:sample/avatars" />
 
-  <TextView
-      android:id="@+id/movie_name_textview"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="16dp"
-      android:layout_marginEnd="20dp"
-      android:layout_marginTop="16dp"
-      android:textSize="24sp"
-      android:textStyle="bold"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      tools:text="The Addams Family 2" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

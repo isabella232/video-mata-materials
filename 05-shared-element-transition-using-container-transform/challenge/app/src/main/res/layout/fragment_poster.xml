@@ -38,7 +38,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#C5E1A5"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:transitionName="@string/card_transition_name">
 
   <ImageView
       android:id="@+id/poster_imageview"

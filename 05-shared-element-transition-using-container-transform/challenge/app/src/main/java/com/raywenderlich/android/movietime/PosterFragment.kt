@@ -40,25 +40,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.transition.TransitionManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.android.material.transition.MaterialContainerTransform
-import com.google.android.material.transition.MaterialFade
-import com.raywenderlich.android.movietime.databinding.FragmentMovieDetailsBinding
+import com.raywenderlich.android.movietime.databinding.FragmentPosterBinding
 
-class MovieDetailsFragment: Fragment() {
+class PosterFragment: Fragment() {
 
-  private var _binding: FragmentMovieDetailsBinding? = null
+  private var _binding: FragmentPosterBinding? = null
   private val binding get() = _binding!!
 
   private val args: MovieDetailsFragmentArgs by navArgs()
@@ -66,12 +60,13 @@ class MovieDetailsFragment: Fragment() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
     movie = MovieRepository.getMovie(args.movieId)
+
     sharedElementEnterTransition = MaterialContainerTransform().apply {
       drawingViewId = R.id.nav_host_fragment
       scrimColor = Color.TRANSPARENT
     }
-
     postponeEnterTransition()
   }
 
@@ -80,54 +75,31 @@ class MovieDetailsFragment: Fragment() {
       container: ViewGroup?,
       savedInstanceState: Bundle?
   ): View {
-    _binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
-
-    with(binding) {
-      moviePosterImageview.transitionName = getString(R.string.poster_transition_name_id, movie.id)
-      root.transitionName = getString(R.string.card_transition_name_id, movie.id)
-      Glide.with(moviePosterImageview)
-          .load(movie.posterLink)
-          .listener(object: RequestListener<Drawable> {
-            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?,
-                                         dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-              startPostponedEnterTransition()
-              return false
-            }
-
-            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?,
-                                      isFirstResource: Boolean): Boolean {
-              return false
-            }
-
-          })
-          .into(moviePosterImageview)
-      movieNameTextview.text = movie.name
-      movieDescriptionTextview.text = movie.summary
-      ratingsTextview.text = movie.ratings.toString()
-      showRatingsButton.setOnClickListener {
-        TransitionManager.beginDelayedTransition(root, MaterialFade())
-        if (ratingsTextview.isVisible) {
-          ratingsTextview.isInvisible = true
-          showRatingsButton.text = resources.getString(R.string.show_ratings)
-        } else {
-          ratingsTextview.isInvisible = false
-          showRatingsButton.text = resources.getString(R.string.hide_ratings)
-        }
-      }
-
-      moviePosterImageview.setOnClickListener {
-        val extras = FragmentNavigatorExtras(
-            binding.moviePosterImageview to getString(R.string.poster_transition_name),
-        )
-        findNavController().navigate(
-            MovieDetailsFragmentDirections.actionMovieDetailsFragmentToPosterFragment(
-                movie.id
-            ),
-            extras
-        )
-      }
-    }
+    _binding = FragmentPosterBinding.inflate(inflater, container, false)
     return binding.root
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+    Glide.with(binding.posterImageview)
+        .load(movie.posterLink)
+        .centerCrop()
+        .listener(object: RequestListener<Drawable> {
+          override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?,
+                                       dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+            startPostponedEnterTransition()
+            return false
+          }
+
+          override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?,
+                                    isFirstResource: Boolean): Boolean {
+            return false
+          }
+
+        })
+        .into(binding.posterImageview)
+    binding.movieNameTextview.text = movie.name
   }
 
   override fun onDestroyView() {
